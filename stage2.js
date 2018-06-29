@@ -32,6 +32,9 @@ var boomerangSpeedY = 0;
 var wizardX = 1440 - edge * 2;
 var wizardY = 362;
 
+var kidWidth;
+var kidHeight;
+
 var warriorWidth;
 var warriorHeight;
 
@@ -283,17 +286,17 @@ function moveAll() {
 		// console.log(wizardX + " " + wizardY);
 
 		if (895 >= wizardX && wizardX > 775 && 362 >= wizardY && wizardY > 242) {
-			wizardX -= 3;
-			wizardY -= 3;
+			wizardX -= 2;
+			wizardY -= 2;
 		} else if (775 >= wizardX && wizardX > 655 && 242 <= wizardY && wizardY < 362) {
-			wizardX -= 3;
-			wizardY += 3;
+			wizardX -= 2;
+			wizardY += 2;
 		} else if (655 <= wizardX && wizardX < 775 && 362 <= wizardY && wizardY < 482) {
-			wizardX += 3;
-			wizardY += 3;
+			wizardX += 2;
+			wizardY += 2;
 		} else if (775 <= wizardX && wizardX < 895 && 482 >= wizardY && wizardY > 362) {
-			wizardX += 3;
-			wizardY -= 3;
+			wizardX += 2;
+			wizardY -= 2;
 		}
   }
 }
@@ -325,21 +328,31 @@ function drawAll() { // update the location of everything in the canvas
 	wizard = new Image();
 	wizard.src = 'images/wizard.png';
 
+  kidWidth = kid.naturalWidth;
+  kidHeight = kid.naturalHeight;
+
   warriorWidth = warrior.naturalWidth;
   warriorHeight = warrior.naturalHeight;
 
+	wizardWidth = wizard.naturalWidth;
+	wizardHeight = wizard.naturalHeight;
+
 	canvasContext.drawImage(kid, 0, edge);
 	canvasContext.font = "10px sans-serif";
-	colorText(kidHealth, 0, edge + characterHeight + 10, 'black');
+	colorText(kidHealth, 0, edge + kidHeight + 10, 'black');
+	canvasContext.drawImage(warrior, 0, edge + kidHeight + 10 + 10);
+	canvasContext.font = "10px sans-serif";
+	colorText(warriorHealth, 0, edge + kidHeight + 10 + 10 + warriorHeight + 10, 'black');
 
 	if (!gameover) {
-		canvasContext.drawImage(warrior, canvas.width - edge, edge);
-		colorText(warriorHealth, canvas.width - edge, edge + warriorHeight + 10, 'black');
+		canvasContext.drawImage(wizard, canvas.width - edge, edge);
+		colorText(wizardHealth, canvas.width - edge, edge + warriorHeight + 10, 'black');
 	} else {
-		canvasContext.drawImage(warrior, 0, edge + characterHeight + 10 + 10);
+		canvasContext.drawImage(wizard, 0, edge + kidHeight + 10 + 10 + warriorHeight + 20);
 		kidHealth = 100;
 		warriorHealth = 100;
-		colorText(warriorHealth, 0, edge + characterHeight + 10 + 10 + warriorHeight + 10, 'black');
+		wizardHealth = 80;
+		colorText(wizardHealth, 0, edge + kidHeight + 10 + 10 + warriorHeight + 10 + wizardHeight + 20, 'black');
 	}
 
 	if (character == "kid") {
@@ -365,7 +378,7 @@ function drawAll() { // update the location of everything in the canvas
 
 	if (overlap(boomerangX, boomerangY, boomerangWidth + boomerangX, boomerangHeight + boomerangY,
 		wizardX, wizardY, wizardX + warriorWidth, wizardY + warriorHeight)) {
-			warriorHealth -= 3;
+			wizardHealth -= 3;
 		}
 
 	sworddown = new Image();
