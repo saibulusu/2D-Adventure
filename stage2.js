@@ -94,6 +94,30 @@ function mousedown(evt) {
 function keyInput(event) { // key events to control the direction of the snake
 	// alert(event.keyCode);
 
+	wizard = new Image();
+	wizard.src = 'images/wizard.png';
+
+	wizardWidth = wizard.naturalWidth;
+	wizardHeight = wizard.naturalHeight;
+
+	sworddown = new Image();
+	sworddown.src = 'images/sword/sworddown.png';
+
+	swordleft = new Image();
+	swordleft.src = 'images/sword/swordleft.png';
+
+	swordup = new Image();
+	swordup.src = 'images/sword/swordup.png';
+
+	swordright = new Image();
+	swordright.src = 'images/sword/swordright.png';
+
+	swordleftwidth = swordleft.naturalWidth;
+	swordleftheight = swordleft.naturalHeight;
+
+	swordupwidth = swordup.naturalWidth;
+	swordupheight = swordup.naturalHeight;
+
   if (state == 2) {
     // code holds the number to map to a direction, using arrow-keys
   	var code = event.keyCode;
@@ -118,7 +142,11 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 0;
   			}
   		} else if (character == "warrior") {
-
+				canvasContext.drawImage(swordleft, xPos - 30, yPos + warriorHeight / 2);
+				if (overlap(xPos - 30, yPos + warriorHeight / 2, xPos - 30 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
+				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
+					wizardHealth -= 1;
+				}
 			}
   	} else if (code == 87) { // w
   		if (character == "kid") {
@@ -131,7 +159,11 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = -10;
   			}
   		} else if (character == "warrior") {
-
+				canvasContext.drawImage(swordup, xPos, yPos - 40);
+				if (overlap(xPos, yPos - 40, xPos + swordupwidth, yPos - 40 + swordupheight,
+				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
+					wizardHealth -= 1;
+				}
 			}
   	} else if (code == 68) { // d
   		if (character == "kid") {
@@ -144,7 +176,11 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 0;
   			}
   		} else if (character == "warrior") {
-
+				canvasContext.drawImage(swordright, xPos + warriorWidth / 2, yPos + warriorHeight / 2);
+				if (overlap(xPos + warriorWidth / 2, yPos + warriorHeight / 2, xPos + warriorWidth / 2 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
+				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
+					wizardHealth -= 1;
+				}
 			}
   	} else if (code == 83) { // s
   		if (character == "kid") {
@@ -157,7 +193,11 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 10;
   			}
   		} else if (character == "warrior") {
-
+				canvasContext.drawImage(sworddown, xPos + warriorWidth / 2, yPos + warriorHeight / 2);
+				if (overlap(xPos + warriorWidth / 2, yPos + warriorHeight / 2, xPos + warriorWidth / 2 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
+				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
+					wizardHealth -= 1;
+				}
 			}
   	} else if (code == 49 && kidHealth > 0) {
   		character = "kid";
@@ -398,18 +438,6 @@ function drawAll() { // update the location of everything in the canvas
 		wizardX, wizardY, wizardX + warriorWidth, wizardY + warriorHeight)) {
 			wizardHealth -= 3;
 		}
-
-	sworddown = new Image();
-	sworddown.src = 'images/sword/sworddown.png';
-
-	swordleft = new Image();
-	swordleft.src = 'images/sword/swordleft.png';
-
-	swordup = new Image();
-	swordup.src = 'images/sword/swordup.png';
-
-	swordright = new Image();
-	swordright.src = 'images/sword/swordright.png';
 
 	if (state == 2 && xPos < wizardX) {
 		if (fireX == -100) {
