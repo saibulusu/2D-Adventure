@@ -14,6 +14,15 @@ var playerSpeed = 10;
 
 var character = "kid";
 
+var fireX = -100;
+var fireY = -100;
+
+var fireStartX;
+var fireStartY;
+
+var fireWidth;
+var fireHeight;
+
 var boomerangX = -100;
 var boomerangY = -100;
 
@@ -319,6 +328,9 @@ function drawAll() { // update the location of everything in the canvas
 		colorRect(canvas.width - edge, canvas.height / 2 - 40, edge, 80, 'black');
 	}
 
+	fire = new Image();
+	fire.src = 'images/fire.png';
+
 	kid = new Image();
 	kid.src = 'images/kid.png';
 
@@ -327,6 +339,12 @@ function drawAll() { // update the location of everything in the canvas
 
 	wizard = new Image();
 	wizard.src = 'images/wizard.png';
+
+	boomerang = new Image();
+	boomerang.src = 'images/boomerang.png';
+
+	fireWidth = fire.naturalWidth;
+	fireHeight = fire.naturalHeight;
 
   kidWidth = kid.naturalWidth;
   kidHeight = kid.naturalHeight;
@@ -369,8 +387,8 @@ function drawAll() { // update the location of everything in the canvas
 
   canvasContext.drawImage(wizard, wizardX, wizardY);
 
-	boomerang = new Image();
-	boomerang.src = 'images/boomerang.png';
+	canvasContext.drawImage(fire, fireX, fireY);
+
 	canvasContext.drawImage(boomerang, boomerangX, boomerangY);
 
 	boomerangWidth = boomerang.naturalWidth;
@@ -393,8 +411,99 @@ function drawAll() { // update the location of everything in the canvas
 	swordright = new Image();
 	swordright.src = 'images/sword/swordright.png';
 
-	swordWidth = swordleft.naturalWidth;
-	swordHeight = swordleft.naturalHeight;
+	if (state == 2 && xPos < wizardX) {
+		if (fireX == -100) {
+			fireStartX = wizardX;
+			fireStartY = wizardY;
+			fireX = wizardX;
+			fireY = wizardY;
+		}
+		if (fireX > fireStartX - 200) {
+			fireX -= 40;
+			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
+				if (character == "kid") {
+					kidHealth -= 4;
+				} else if (character == "warrior") {
+					warriorHealth -= 4;
+				}
+			}
+		} else {
+			fireX = -100;
+			fireY = -100;
+			fireStartX = -100;
+			fireStartY = -100;
+		}
+	} else if (state == 2 && yPos < wizardY) {
+		if (fireX == -100) {
+			fireStartX = wizardX;
+			fireStartY = wizardY;
+			fireX = wizardX;
+			fireY = wizardY;
+		}
+		if (fireY > fireStartY - 200) {
+			fireY -= 40;
+			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
+				if (character == "kid") {
+					kidHealth -= 4;
+				} else if (character == "warrior") {
+					warriorHealth -= 4;
+				}
+			}
+		} else {
+			fireX = -100;
+			fireY = -100;
+			fireStartX = -100;
+			fireStartY = -100;
+		}
+	} else if (state == 2 && xPos > wizardX) {
+		if (fireX == -100) {
+			fireStartX = wizardX;
+			fireStartY = wizardY;
+			fireX = wizardX;
+			fireY = wizardY;
+		}
+		if (fireX < fireStartX + 200) {
+			fireX += 40;
+			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
+				if (character == "kid") {
+					kidHealth -= 4;
+				} else if (character == "warrior") {
+					warriorHealth -= 4;
+				}
+			}
+		} else {
+			fireX = -100;
+			fireY = -100;
+			fireStartX = -100;
+			fireStartY = -100;
+		}
+	} else if (state == 2 && yPos > wizardY) {
+		if (fireY == -100) {
+			fireStartX = wizardX;
+			fireStartY = wizardY;
+			fireX = wizardX;
+			fireY = wizardY;
+		}
+		if (fireY < fireStartY + 200) {
+			fireY += 40;
+			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
+				if (character == "kid") {
+					kidHealth -= 4;
+				} else if (character == "warrior") {
+					warriorHealth -= 4;
+				}
+			}
+		} else {
+			fireX = -100;
+			fireY = -100;
+			fireStartX = -100;
+			fireStartY = -100;
+		}
+	}
 
 	if (state == 1) {
 		colorRect(400, 200, 700, 100, 'white');
