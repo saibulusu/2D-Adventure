@@ -58,16 +58,23 @@ function mousedown(evt) {
     } else if (state == 1.1) {
 		state = 2;
 	} else if (state == 2.1) {
-		state == 2.2;
+		state = 2.2;
 	} else if (state == 2.2) {
 		state = 3;
+	} else if (state == 4) {
+		state = 4.1;
+	} else if (state == 4.1) {
+		state = 4.2;
+		gameover = true;
+	} else if (state == 4.2) {
+		state = 5;
 	}
 }
 
 function keyInput(event) { // key events to control the direction of the snake
 	// alert(event.keyCode);
 
-  if (state == 2 || state == 3) {
+  if (state == 2 || state == 3 || state == 5) {
     // code holds the number to map to a direction, using arrow-keys
   	var code = event.keyCode;
 
@@ -91,7 +98,7 @@ function keyInput(event) { // key events to control the direction of the snake
   		// speed = 7;
   	}
   }
-  if (state == 3) {
+  if (state == 3 || state == 5) {
 	  if (code == 65) { // a
   		if (character == "kid") {
   			if (boomerangX == -100) {
@@ -158,7 +165,7 @@ function keepLegal() { // ensure that the current position of the player is stil
 
 	if (gameover) {
 		if (xPos > canvas.width) {
-			window.open("stage2.html", "_self")
+			window.open("setting.html", "_self")
 		}
 	}
 
@@ -223,7 +230,7 @@ function moveAll() {
 		if (xPos+characterWidth >= 800 && yPos+characterHeight >= 500 &&
 			xPos <= 800+boomerangWidth && yPos+characterHeight<=500+boomerangHeight)
 			state = 2.1;
-	} else if (state == 3) {
+	} else if (state == 3 || state == 5) {
     boomerangX += boomerangSpeedX;
   	boomerangY += boomerangSpeedY;
 
@@ -249,6 +256,11 @@ function moveAll() {
   		boomerangSpeedX = 0;
   		boomerangSpeedY = 0;
   	}
+	if (state == 3 && boomerangX+boomerangWidth >= 200 && boomerangX <= 230 &&
+			boomerangY+boomerangHeight >= 400 && boomerangY <= 430) {
+		boomerangX = -100;
+		state = 4;
+	}
 
 		// 895 362
 		// 775 242
@@ -284,12 +296,16 @@ function drawAll() { // update the location of everything in the canvas
 	colorText(kidHealth, 0, edge + characterHeight + 10, 'black');
 
 	if (state == 1.1 || state == 2) {
-		boomerangWidth = boomerang.naturalWidth;
-		boomerangHeight = boomerang.naturalHeight;
-		
 		boomerang = new Image();
 		boomerang.src = 'images/boomerang.png';
 		canvasContext.drawImage(boomerang, 800, 500);
+		
+		boomerangWidth = boomerang.naturalWidth;
+		boomerangHeight = boomerang.naturalHeight;
+	} else if (state == 2.2 || state == 3) {
+		target = new Image();
+		target.src = 'images/target.png';
+		canvasContext.drawImage(target, 200, 400, 30, 30);
 	}
 	
 	if (character == "kid") {
@@ -314,6 +330,12 @@ function drawAll() { // update the location of everything in the canvas
 		writeMessage("Kid: Wow a boomerang");
 	} else if (state == 2.2) {
 		writeMessage("Kid: Use WASD to throw the boomerang at that thing");
+	} else if (state == 4) {
+		writeMessage("Kid: Well done, you've learned the basics.");
+	} else if (state == 4.1) {
+		writeMessage("Kid: You can see how much health I have left in the upper left corner");
+	} else if (state == 4.2) {
+		writeMessage("Kid: Now let's travel east to fight the imp!");
 	}
 }
 

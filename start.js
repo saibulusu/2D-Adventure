@@ -37,6 +37,10 @@ function mousedown(evt) {
   && clickY >= canvas.height / 2 - 50 && clickY <= canvas.height / 2 - 50 + 70) {
     window.open("setting.html","_self");
   }
+  if (clickX >= canvas.width / 2 - 150 && clickX <= canvas.width / 2 - 150 + 280
+  && clickY >= canvas.height / 2 + 70 && clickY <= canvas.height / 2 + 70 + 70) {
+    window.open("tutorial.html","_self");
+  }
 }
 
 // update the position of the mouse
@@ -52,9 +56,19 @@ function mousemove(evt) {
   && mouseY >= canvas.height / 2 - 50 && mouseY <= canvas.height / 2 - 50 + 70) {
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'black');
     colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'white');
+	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
+    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
+  } else if (mouseX >= canvas.width / 2 - 150 && mouseX <= canvas.width / 2 - 150 + 280
+  && mouseY >= canvas.height / 2 + 70 && mouseY <= canvas.height / 2 + 70 + 70) {
+	  colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
+    colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
+	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'black');
+    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'white');
   } else {
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
     colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
+	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
+    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
   }
 }
 
@@ -74,6 +88,8 @@ function drawAll() { // update the location of everything in the canvas
   colorText("Welcome to 2D Adventure!", canvas.width / 2 - 300, canvas.height / 2 - 200, 'white');
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
   colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
+  colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
+  colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
 }
 
 // helper function to draw a square
