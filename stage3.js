@@ -7,8 +7,8 @@ var edge = 40;
 var xPos = 0;
 var yPos = 362;
 
-var characterWidth;
-var characterHeight;
+var playerWidth;
+var playerHeight;
 
 var impWidth;
 var impHeight;
@@ -193,8 +193,8 @@ function drawAll() { // update the location of everything in the canvas
   wizard = new Image();
   wizard.src = 'images/wizard.png';
 
-  characterWidth = kid.naturalWidth;
-  characterHeight = kid.naturalHeight;
+  playerWidth = kid.naturalWidth;
+  playerHeight = kid.naturalHeight;
 
   canvasContext.drawImage(kid, xPos, yPos);
 	canvasContext.drawImage(warrior, xPos - warrior.naturalWidth - 10, yPos);

@@ -7,12 +7,12 @@ var edge = 40;
 var xPos = edge;
 var yPos = 362;
 
-var characterWidth;
-var characterHeight;
+var playerWidth;
+var playerHeight;
 
 var playerSpeed = 5;
 
-var character = "kid";
+var player = "kid";
 
 var boomerangX = -100;
 var boomerangY = -100;
@@ -116,9 +116,20 @@ function keyInput(event) { // key events to control the direction of the snake
   		// speed = 7;
   	}
   }
+
+	if (code == 65) { // a
+		xPos -= playerSpeed;
+	} else if (code == 87) { // w
+		yPos -= playerSpeed;
+	} else if (code == 68) { // d
+		xPos += playerSpeed;
+	} else if (code == 83) { // s
+		yPos += playerSpeed;
+	}
+
   if (state == 3 || state == 5) {
-	  if (code == 65) { // a
-  		if (character == "kid") {
+		if (code == 74) { // left
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -128,8 +139,8 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 0;
   			}
   		}
-  	} else if (code == 87) { // w
-  		if (character == "kid") {
+  	} else if (code == 73) { // up
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -139,8 +150,8 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = -10;
   			}
   		}
-  	} else if (code == 68) { // d
-  		if (character == "kid") {
+  	} else if (code == 76) { // right
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -150,8 +161,8 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 0;
   			}
   		}
-  	} else if (code == 83) { // s
-  		if (character == "kid") {
+  	} else if (code == 75) { // down
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -161,7 +172,17 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedY = 10;
   			}
   		}
+  	} else if (code == 49) {
+  		// player = "kid";
+  		// speed = 10;
+  	} else if (code == 50) {
+  		// player = "warrior";
+  		// speed = 12;
+  	} else if (code == 51) {
+  		// player = "wizard";
+  		// speed = 7;
   	}
+
   }
 }
 
@@ -195,16 +216,16 @@ function keepLegal() { // ensure that the current position of the player is stil
 		yPos = edge;
 	}
 
-	if (xPos + characterWidth > canvas.width - edge && !gameover) {
-		xPos = canvas.width - edge - characterWidth;
+	if (xPos + playerWidth > canvas.width - edge && !gameover) {
+		xPos = canvas.width - edge - playerWidth;
 	}
 
-	if (gameover && xPos + characterWidth > canvas.width - edge && (yPos < canvas.height / 2 - 40 || yPos + characterHeight > canvas.height / 2 + 40)) {
-		xPos = canvas.width - edge - characterWidth;
+	if (gameover && xPos + playerWidth > canvas.width - edge && (yPos < canvas.height / 2 - 40 || yPos + playerHeight > canvas.height / 2 + 40)) {
+		xPos = canvas.width - edge - playerWidth;
 	}
 
-	if (yPos + characterHeight > canvas.height - edge) {
-		yPos = canvas.height - edge - characterHeight;
+	if (yPos + playerHeight > canvas.height - edge) {
+		yPos = canvas.height - edge - playerHeight;
 	}
 
 	if (boomerangX != -100) {
@@ -245,8 +266,8 @@ function moveAll() {
 	  }
 	  xPos += 3;
 	} else if (state == 2) {
-		if (xPos+characterWidth >= 800 && yPos+characterHeight >= 500 &&
-			xPos <= 800+boomerangWidth && yPos+characterHeight<=500+boomerangHeight)
+		if (xPos+playerWidth >= 800 && yPos+playerHeight >= 500 &&
+			xPos <= 800+boomerangWidth && yPos+playerHeight<=500+boomerangHeight)
 			state = 2.1;
 		if (left) { // left
 			xPos -= playerSpeed;
@@ -329,13 +350,13 @@ function drawAll() { // update the location of everything in the canvas
 
 	canvasContext.drawImage(kid, 0, edge);
 	canvasContext.font = "10px sans-serif";
-	colorText(kidHealth, 0, edge + characterHeight + 10, 'black');
+	colorText(kidHealth, 0, edge + playerHeight + 10, 'black');
 
 	if (state == 1.1 || state == 2) {
 		boomerang = new Image();
 		boomerang.src = 'images/boomerang.png';
 		canvasContext.drawImage(boomerang, 800, 500);
-		
+
 		boomerangWidth = boomerang.naturalWidth;
 		boomerangHeight = boomerang.naturalHeight;
 	} else if (state == 2.2 || state == 3) {
@@ -343,12 +364,12 @@ function drawAll() { // update the location of everything in the canvas
 		target.src = 'images/target.png';
 		canvasContext.drawImage(target, 200, 400, 30, 30);
 	}
-	
-	if (character == "kid") {
+
+	if (player == "kid") {
 		canvasContext.drawImage(kid, xPos, yPos);
 
-		characterWidth = kid.naturalWidth;
-		characterHeight = kid.naturalHeight;
+		playerWidth = kid.naturalWidth;
+		playerHeight = kid.naturalHeight;
 	}
 
 	boomerang = new Image();
@@ -361,11 +382,11 @@ function drawAll() { // update the location of everything in the canvas
 	if (state == 1) {
 		writeMessage("Kid: I am going on an adventure, but I need your help");
 	} else if (state == 1.1) {
-		writeMessage("Kid: Use IJKL to move me over there");
+		writeMessage("Kid: Use WASD to move me over there");
 	} else if (state == 2.1) {
 		writeMessage("Kid: Wow a boomerang");
 	} else if (state == 2.2) {
-		writeMessage("Kid: Use WASD to throw the boomerang at that thing");
+		writeMessage("Kid: Use IJKL to throw the boomerang at that thing");
 	} else if (state == 4) {
 		writeMessage("Kid: Well done, you've learned the basics.");
 	} else if (state == 4.1) {

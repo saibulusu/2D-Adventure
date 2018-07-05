@@ -7,12 +7,12 @@ var edge = 40;
 var xPos = edge;
 var yPos = 362;
 
-var characterWidth;
-var characterHeight;
+var playerWidth;
+var playerHeight;
 
 var playerSpeed = 5;
 
-var character = "kid";
+var player = "kid";
 
 var fireX = -100;
 var fireY = -100;
@@ -142,6 +142,7 @@ function keyInput(event) { // key events to control the direction of the snake
 
   	// make sure that the movement does not cause the snake to move into itself
   	if (code == 74) { // left
+<<<<<<< HEAD
 		left = true;
   	} else if (code == 73) { // up
 		up = true;
@@ -151,6 +152,9 @@ function keyInput(event) { // key events to control the direction of the snake
 		down = true;
   	} else if (code == 65) { // a
   		if (character == "kid") {
+=======
+			if (player == "kid") {
+>>>>>>> bd4ef1c5f694533fe02c8354775a058093bbf29e
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -159,15 +163,15 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedX = -10;
   				boomerangSpeedY = 0;
   			}
-  		} else if (character == "warrior") {
+  		} else if (player == "warrior") {
 				canvasContext.drawImage(swordleft, xPos - 30, yPos + warriorHeight / 2);
 				if (overlap(xPos - 30, yPos + warriorHeight / 2, xPos - 30 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
 				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
 					wizardHealth -= 1;
 				}
 			}
-  	} else if (code == 87) { // w
-  		if (character == "kid") {
+  	} else if (code == 73) { // up
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -176,15 +180,15 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedX = 0;
   				boomerangSpeedY = -10;
   			}
-  		} else if (character == "warrior") {
+  		} else if (player == "warrior") {
 				canvasContext.drawImage(swordup, xPos, yPos - 40);
 				if (overlap(xPos, yPos - 40, xPos + swordupwidth, yPos - 40 + swordupheight,
 				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
 					wizardHealth -= 1;
 				}
 			}
-  	} else if (code == 68) { // d
-  		if (character == "kid") {
+  	} else if (code == 76) { // right
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -193,15 +197,15 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedX = 10;
   				boomerangSpeedY = 0;
   			}
-  		} else if (character == "warrior") {
+  		} else if (player == "warrior") {
 				canvasContext.drawImage(swordright, xPos + warriorWidth / 2, yPos + warriorHeight / 2);
 				if (overlap(xPos + warriorWidth / 2, yPos + warriorHeight / 2, xPos + warriorWidth / 2 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
 				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
 					wizardHealth -= 1;
 				}
 			}
-  	} else if (code == 83) { // s
-  		if (character == "kid") {
+  	} else if (code == 75) { // down
+			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
@@ -210,21 +214,29 @@ function keyInput(event) { // key events to control the direction of the snake
   				boomerangSpeedX = 0;
   				boomerangSpeedY = 10;
   			}
-  		} else if (character == "warrior") {
+  		} else if (player == "warrior") {
 				canvasContext.drawImage(sworddown, xPos + warriorWidth / 2, yPos + warriorHeight / 2);
 				if (overlap(xPos + warriorWidth / 2, yPos + warriorHeight / 2, xPos + warriorWidth / 2 + swordleftwidth, yPos + warriorHeight / 2 + swordleftheight,
 				wizardX, wizardY, wizardX + wizardWidth, wizardY + wizardHeight)) {
 					wizardHealth -= 1;
 				}
 			}
+  	} else if (code == 65) { // a
+			xPos -= playerSpeed;
+  	} else if (code == 87) { // w
+			yPos -= playerSpeed;
+  	} else if (code == 68) { // d
+			xPos += playerSpeed;
+  	} else if (code == 83) { // s
+			yPos += playerSpeed;
   	} else if (code == 49 && kidHealth > 0) {
-  		character = "kid";
+  		player = "kid";
   		speed = 10;
   	} else if (code == 50 && warriorHealth > 0) {
-  		character = "warrior";
+  		player = "warrior";
   		speed = 12;
   	} else if (code == 51) {
-  		// character = "wizard";
+  		// player = "wizard";
   		// speed = 7;
   	}
   }
@@ -249,10 +261,12 @@ function keepLegal() { // ensure that the current position of the player is stil
 		gameover = true;
 		wizardX = -100;
 		wizardY = -100;
+		fireX = -100;
+		fireY = -100;
 	} else if (kidHealth <= 0) {
-		character = "warrior";
+		player = "warrior";
 	} else if (warriorHealth <= 0) {
-		character = "kid";
+		player = "kid";
 	}
 
 	if (gameover) {
@@ -269,16 +283,16 @@ function keepLegal() { // ensure that the current position of the player is stil
 		yPos = edge;
 	}
 
-	if (xPos + characterWidth > canvas.width - edge && !gameover) {
-		xPos = canvas.width - edge - characterWidth;
+	if (xPos + playerWidth > canvas.width - edge && !gameover) {
+		xPos = canvas.width - edge - playerWidth;
 	}
 
-	if (gameover && xPos + characterWidth > canvas.width - edge && (yPos < canvas.height / 2 - 40 || yPos + characterHeight > canvas.height / 2 + 40)) {
-		xPos = canvas.width - edge - characterWidth;
+	if (gameover && xPos + playerWidth > canvas.width - edge && (yPos < canvas.height / 2 - 40 || yPos + playerHeight > canvas.height / 2 + 40)) {
+		xPos = canvas.width - edge - playerWidth;
 	}
 
-	if (yPos + characterHeight > canvas.height - edge) {
-		yPos = canvas.height - edge - characterHeight;
+	if (yPos + playerHeight > canvas.height - edge) {
+		yPos = canvas.height - edge - playerHeight;
 	}
 
 	if (boomerangX != -100) {
@@ -443,16 +457,16 @@ function drawAll() { // update the location of everything in the canvas
 		colorText(wizardHealth, 0, edge + kidHeight + 10 + 10 + warriorHeight + 10 + wizardHeight + 20, 'black');
 	}
 
-	if (character == "kid") {
+	if (player == "kid") {
 		canvasContext.drawImage(kid, xPos, yPos);
 
-		characterWidth = kid.naturalWidth;
-		characterHeight = kid.naturalHeight;
-	} else if (character == "warrior") {
+		playerWidth = kid.naturalWidth;
+		playerHeight = kid.naturalHeight;
+	} else if (player == "warrior") {
 		canvasContext.drawImage(warrior, xPos, yPos);
 
-		characterWidth = warrior.naturalWidth;
-		characterHeight = warrior.naturalHeight;
+		playerWidth = warrior.naturalWidth;
+		playerHeight = warrior.naturalHeight;
 	}
 
   canvasContext.drawImage(wizard, wizardX, wizardY);
@@ -478,11 +492,11 @@ function drawAll() { // update the location of everything in the canvas
 		}
 		if (fireX > fireStartX - 200) {
 			fireX -= 40;
-			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			if (overlap(xPos, yPos, xPos + playerWidth, yPos + playerHeight,
 			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
-				if (character == "kid") {
+				if (player == "kid") {
 					kidHealth -= 4;
-				} else if (character == "warrior") {
+				} else if (player == "warrior") {
 					warriorHealth -= 4;
 				}
 			}
@@ -501,11 +515,11 @@ function drawAll() { // update the location of everything in the canvas
 		}
 		if (fireY > fireStartY - 200) {
 			fireY -= 40;
-			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			if (overlap(xPos, yPos, xPos + playerWidth, yPos + playerHeight,
 			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
-				if (character == "kid") {
+				if (player == "kid") {
 					kidHealth -= 4;
-				} else if (character == "warrior") {
+				} else if (player == "warrior") {
 					warriorHealth -= 4;
 				}
 			}
@@ -524,11 +538,11 @@ function drawAll() { // update the location of everything in the canvas
 		}
 		if (fireX < fireStartX + 200) {
 			fireX += 40;
-			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			if (overlap(xPos, yPos, xPos + playerWidth, yPos + playerHeight,
 			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
-				if (character == "kid") {
+				if (player == "kid") {
 					kidHealth -= 4;
-				} else if (character == "warrior") {
+				} else if (player == "warrior") {
 					warriorHealth -= 4;
 				}
 			}
@@ -547,11 +561,11 @@ function drawAll() { // update the location of everything in the canvas
 		}
 		if (fireY < fireStartY + 200) {
 			fireY += 40;
-			if (overlap(xPos, yPos, xPos + characterWidth, yPos + characterHeight,
+			if (overlap(xPos, yPos, xPos + playerWidth, yPos + playerHeight,
 			fireX, fireY, fireX + fireWidth, fireY + fireHeight)) {
-				if (character == "kid") {
+				if (player == "kid") {
 					kidHealth -= 4;
-				} else if (character == "warrior") {
+				} else if (player == "warrior") {
 					warriorHealth -= 4;
 				}
 			}

@@ -57,18 +57,18 @@ function mousemove(evt) {
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'black');
     colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'white');
 	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
-    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
+    colorText("Tutorial", canvas.width / 2 - 95, canvas.height / 2 + 120, 'black');
   } else if (mouseX >= canvas.width / 2 - 150 && mouseX <= canvas.width / 2 - 150 + 280
   && mouseY >= canvas.height / 2 + 70 && mouseY <= canvas.height / 2 + 70 + 70) {
 	  colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
     colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
 	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'black');
-    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'white');
+    colorText("Tutorial", canvas.width / 2 - 95, canvas.height / 2 + 120, 'white');
   } else {
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
     colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
 	colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
-    colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
+    colorText("Tutorial", canvas.width / 2 - 95, canvas.height / 2 + 120, 'black');
   }
 }
 
@@ -89,7 +89,7 @@ function drawAll() { // update the location of everything in the canvas
     colorRect(canvas.width / 2 - 150, canvas.height / 2 - 50, 280, 70, 'white');
   colorText("Begin Game", canvas.width / 2 - 150, canvas.height / 2, 'black');
   colorRect(canvas.width / 2 - 150, canvas.height / 2 + 70, 280, 70, 'white');
-  colorText("Tutorial", canvas.width / 2 - 110, canvas.height / 2 + 120, 'black');
+  colorText("Tutorial", canvas.width / 2 - 95, canvas.height / 2 + 120, 'black');
 }
 
 // helper function to draw a square
