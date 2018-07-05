@@ -10,7 +10,7 @@ var yPos = 362;
 var characterWidth;
 var characterHeight;
 
-var playerSpeed = 10;
+var playerSpeed = 5;
 
 var character = "kid";
 
@@ -70,6 +70,24 @@ function mousedown(evt) {
 	}
 }
 
+var up = false;
+var down = false;
+var left = false;
+var right = false;
+document.onkeyup = keyRelease;
+function keyRelease(event) {
+	var code = event.keyCode;
+	if (code == 74) {
+		left = false;
+	} else if (code == 73) {
+		up = false;
+	} else if (code == 76) {
+		right = false;
+	} else if (code == 75) {
+		down = false;
+	}
+}
+
 function keyInput(event) { // key events to control the direction of the snake
 	// alert(event.keyCode);
 
@@ -79,13 +97,13 @@ function keyInput(event) { // key events to control the direction of the snake
 
   	// make sure that the movement does not cause the snake to move into itself
   	if (code == 74) { // left
-  		xPos -= playerSpeed;
+		left = true;
   	} else if (code == 73) { // up
-  		yPos-= playerSpeed;
+		up = true;
   	} else if (code == 76) { // right
-  		xPos += playerSpeed;
+		right = true;
   	} else if (code == 75) { // down
-  		yPos += playerSpeed;
+		down = true;
   	} else if (code == 65) { // a
   		if (character == "kid") {
   			if (boomerangX == -100) {
@@ -229,6 +247,18 @@ function moveAll() {
 	  xPos += 3;
 	  warriorX -= 3;
 	} else if (state == 2) {
+		
+		//player movement
+		if (left) { // left
+			xPos -= playerSpeed;
+		} else if (up) { // up
+			yPos-= playerSpeed;
+		} else if (right) { // right
+			xPos += playerSpeed;
+		} else if (down) { // down
+			yPos += playerSpeed;
+		}
+		
     boomerangX += boomerangSpeedX;
   	boomerangY += boomerangSpeedY;
 
