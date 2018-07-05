@@ -79,7 +79,20 @@ function keyInput(event) { // key events to control the direction of the snake
   	var code = event.keyCode;
 
   	// make sure that the movement does not cause the snake to move into itself
-  	if (code == 74) { // left
+  }
+
+	if (code == 65) { // a
+		xPos -= playerSpeed;
+	} else if (code == 87) { // w
+		yPos -= playerSpeed;
+	} else if (code == 68) { // d
+		xPos += playerSpeed;
+	} else if (code == 83) { // s
+		yPos += playerSpeed;
+	}
+
+  if (state == 3 || state == 5) {
+		if (code == 74) { // left
 			if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
@@ -133,17 +146,7 @@ function keyInput(event) { // key events to control the direction of the snake
   		// player = "wizard";
   		// speed = 7;
   	}
-  }
-  if (state == 3 || state == 5) {
-	  if (code == 65) { // a
-			xPos -= playerSpeed;
-  	} else if (code == 87) { // w
-			yPos -= playerSpeed;
-  	} else if (code == 68) { // d
-			xPos += playerSpeed;
-  	} else if (code == 83) { // s
-			yPos += playerSpeed;
-  	}
+
   }
 }
 
