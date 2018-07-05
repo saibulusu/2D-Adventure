@@ -77,13 +77,13 @@ var right = false;
 document.onkeyup = keyRelease;
 function keyRelease(event) {
 	var code = event.keyCode;
-	if (code == 74) {
+	if (code == 65) {
 		left = false;
-	} else if (code == 73) {
+	} else if (code == 87) {
 		up = false;
-	} else if (code == 76) {
+	} else if (code == 68) {
 		right = false;
-	} else if (code == 75) {
+	} else if (code == 83) {
 		down = false;
 	}
 }
@@ -96,20 +96,16 @@ function keyInput(event) { // key events to control the direction of the snake
   	var code = event.keyCode;
 
   	// make sure that the movement does not cause the snake to move into itself
-  	if (code == 74) { // left
-<<<<<<< HEAD
+  	if (code == 65) { // left
 		left = true;
-  	} else if (code == 73) { // up
+  	} else if (code == 87) { // up
 		up = true;
-  	} else if (code == 76) { // right
+  	} else if (code == 68) { // right
 		right = true;
-  	} else if (code == 75) { // down
+  	} else if (code == 83) { // down
 		down = true;
   	} else if (code == 65) { // a
-  		if (character == "kid") {
-=======
-			if (player == "kid") {
->>>>>>> bd4ef1c5f694533fe02c8354775a058093bbf29e
+		if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
   				boomerangY = yPos;
