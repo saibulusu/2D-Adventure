@@ -7,8 +7,8 @@ var edge = 40;
 var xPos = 0;
 var yPos = 362;
 
-var characterWidth;
-var characterHeight;
+var playerWidth;
+var playerHeight;
 
 var impWidth;
 var impHeight;
@@ -63,12 +63,12 @@ function keepLegal() { // ensure that the current position of the player is stil
 	// 	yPos = edge;
 	// }
   //
-	// if (xPos + characterWidth > canvas.width - edge) {
-	// 	xPos = canvas.width - edge - characterWidth;
+	// if (xPos + playerWidth > canvas.width - edge) {
+	// 	xPos = canvas.width - edge - playerWidth;
 	// }
   //
-	// if (yPos + characterHeight > canvas.height - edge) {
-	// 	yPos = canvas.height - edge - characterHeight;
+	// if (yPos + playerHeight > canvas.height - edge) {
+	// 	yPos = canvas.height - edge - playerHeight;
 	// }
 }
 
@@ -149,8 +149,8 @@ function drawAll() { // update the location of everything in the canvas
 	kid = new Image();
 	kid.src = 'images/kid.png';
 
-  characterWidth = kid.naturalWidth;
-  characterHeight = kid.naturalHeight;
+  playerWidth = kid.naturalWidth;
+  playerHeight = kid.naturalHeight;
 
   canvasContext.drawImage(kid, xPos, yPos);
 

@@ -7,8 +7,8 @@ var edge = 40;
 var xPos = 720;
 var yPos = 362;
 
-var characterWidth;
-var characterHeight;
+var playerwidth;
+var playerheight;
 
 var fireballWidth;
 var fireballHeight;
@@ -20,7 +20,7 @@ var fireSpeedY = 0;
 
 var speed = 10;
 
-var character = "kid";
+var player = "kid";
 
 var boomerangX = -100;
 var boomerangY = -100;
@@ -72,7 +72,7 @@ function keyInput(event) { // key events to control the direction of the snake
 	} else if (code == 75) { // down
 		yPos += speed;
 	} else if (code == 65) { // a
-		if (character == "kid") {
+		if (player == "kid") {
 			if (boomerangX == -100) {
 				boomerangX = xPos;
 				boomerangY = yPos;
@@ -83,7 +83,7 @@ function keyInput(event) { // key events to control the direction of the snake
 			}
 		}
 	} else if (code == 87) { // w
-		if (character == "kid") {
+		if (player == "kid") {
 			if (boomerangX == -100) {
 				boomerangX = xPos;
 				boomerangY = yPos;
@@ -94,7 +94,7 @@ function keyInput(event) { // key events to control the direction of the snake
 			}
 		}
 	} else if (code == 68) { // d
-		if (character == "kid") {
+		if (player == "kid") {
 			if (boomerangX == -100) {
 				boomerangX = xPos;
 				boomerangY = yPos;
@@ -105,7 +105,7 @@ function keyInput(event) { // key events to control the direction of the snake
 			}
 		}
 	} else if (code == 83) { // s
-		if (character == "kid") {
+		if (player == "kid") {
 			if (boomerangX == -100) {
 				boomerangX = xPos;
 				boomerangY = yPos;
@@ -116,13 +116,13 @@ function keyInput(event) { // key events to control the direction of the snake
 			}
 		}
 	} else if (code == 49) {
-		character = "kid";
+		player = "kid";
 		speed = 10;
 	} else if (code == 50) {
-		character = "warrior";
+		player = "warrior";
 		speed = 12;
 	} else if (code == 51) {
-		character = "wizard";
+		player = "wizard";
 		speed = 7;
 	}
 }
@@ -143,12 +143,12 @@ function keepLegal() { // ensure that the current position of the player is stil
 		yPos = edge;
 	}
 
-	if (xPos + characterWidth > canvas.width - edge) {
-		xPos = canvas.width - edge - characterWidth;
+	if (xPos + playerwidth > canvas.width - edge) {
+		xPos = canvas.width - edge - playerwidth;
 	}
 
-	if (yPos + characterHeight > canvas.height - edge) {
-		yPos = canvas.height - edge - characterHeight;
+	if (yPos + playerheight > canvas.height - edge) {
+		yPos = canvas.height - edge - playerheight;
 	}
 
 	if (impX < edge) {
@@ -289,21 +289,21 @@ function drawAll() { // update the location of everything in the canvas
 	canvasContext.drawImage(warrior, 0, edge + kid.naturalHeight + 5);
 	canvasContext.drawImage(wizard, 0, edge + kid.naturalHeight + 5 + warrior.naturalHeight + 5);
 
-	if (character == "kid") {
+	if (player == "kid") {
 		canvasContext.drawImage(kid, xPos, yPos);
 
-		characterWidth = kid.naturalWidth;
-		characterHeight = kid.naturalHeight;
-	} else if (character == "warrior") {
+		playerwidth = kid.naturalWidth;
+		playerheight = kid.naturalHeight;
+	} else if (player == "warrior") {
 		canvasContext.drawImage(warrior, xPos, yPos);
 
-		characterWidth = warrior.naturalWidth;
-		characterHeight = warrior.naturalHeight;
-	} else if (character == "wizard") {
+		playerwidth = warrior.naturalWidth;
+		playerheight = warrior.naturalHeight;
+	} else if (player == "wizard") {
 		canvasContext.drawImage(wizard, xPos, yPos);
 
-		characterWidth = wizard.naturalWidth;
-		characterHeight = wizard.naturalHeight;
+		playerwidth = wizard.naturalWidth;
+		playerheight = wizard.naturalHeight;
 	}
 
 	boomerang = new Image();
