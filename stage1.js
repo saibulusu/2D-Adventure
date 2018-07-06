@@ -104,7 +104,7 @@ function keyInput(event) { // key events to control the direction of the snake
 		right = true;
   	} else if (code == 83) { // down
 		down = true;
-  	} else if (code == 65) { // a
+  	} else if (code == 74) { // a
 		if (player == "kid") {
   			if (boomerangX == -100) {
   				boomerangX = xPos;
