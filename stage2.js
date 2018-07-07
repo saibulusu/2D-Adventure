@@ -119,16 +119,16 @@ function keyInput(event) { // key events to control the direction of the snake
 	wizardHeight = wizard.naturalHeight;
 
 	sworddown = new Image();
-	sworddown.src = 'images/sword/sworddown.png';
+	sworddown.src = 'images/sworddown.png';
 
 	swordleft = new Image();
-	swordleft.src = 'images/sword/swordleft.png';
+	swordleft.src = 'images/swordleft.png';
 
 	swordup = new Image();
-	swordup.src = 'images/sword/swordup.png';
+	swordup.src = 'images/swordup.png';
 
 	swordright = new Image();
-	swordright.src = 'images/sword/swordright.png';
+	swordright.src = 'images/swordright.png';
 
 	swordleftwidth = swordleft.naturalWidth;
 	swordleftheight = swordleft.naturalHeight;
@@ -330,7 +330,7 @@ function moveAll() {
 	  xPos += 3;
 	  wizardX -= 3;
 	} else if (state == 2) {
-		
+
 		//player movement
 		if (left) { // left
 			xPos -= playerSpeed;
@@ -341,7 +341,7 @@ function moveAll() {
 		} else if (down) { // down
 			yPos += playerSpeed;
 		}
-		
+
     boomerangX += boomerangSpeedX;
   	boomerangY += boomerangSpeedY;
 

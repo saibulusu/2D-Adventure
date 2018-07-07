@@ -255,7 +255,7 @@ function moveAll() {
 	  xPos += 3;
 	  warriorX -= 3;
 	} else if (state == 2) {
-		
+
 		//player movement
 		if (left) { // left
 			xPos -= playerSpeed;
@@ -266,7 +266,7 @@ function moveAll() {
 		} else if (down) { // down
 			yPos += playerSpeed;
 		}
-		
+
     boomerangX += boomerangSpeedX;
   	boomerangY += boomerangSpeedY;
 
@@ -378,16 +378,16 @@ function drawAll() { // update the location of everything in the canvas
 		}
 
 	sworddown = new Image();
-	sworddown.src = 'images/sword/sworddown.png';
+	sworddown.src = 'images/sworddown.png';
 
 	swordleft = new Image();
-	swordleft.src = 'images/sword/swordleft.png';
+	swordleft.src = 'images/swordleft.png';
 
 	swordup = new Image();
-	swordup.src = 'images/sword/swordup.png';
+	swordup.src = 'images/swordup.png';
 
 	swordright = new Image();
-	swordright.src = 'images/sword/swordright.png';
+	swordright.src = 'images/swordright.png';
 
 	swordWidth = swordleft.naturalWidth;
 	swordHeight = swordleft.naturalHeight;
