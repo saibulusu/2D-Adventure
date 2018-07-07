@@ -256,8 +256,8 @@ function moveAll() {
 	  }
 	  xPos += 3;
 	} else if (state == 2) {
-		if (xPos+playerWidth >= 800 && yPos+playerHeight >= 500 &&
-			xPos <= 800+boomerangWidth && yPos+playerHeight<=500+boomerangHeight)
+		if (overlap(xPos, yPos, xPos + playerWidth, yPos + playerHeight,
+			800, 500, 800 + boomerangWidth, 500 + boomerangHeight))
 			state = 2.1;
 		if (left) { // left
 			xPos -= playerSpeed;

@@ -164,7 +164,7 @@ function moveAll() {
 		colorRect(400, 200, 700, 100, 'white');
     colorText("Warrior: Let's get new teammates", 600, 250, 'black');
 	} else if (state == 12) {
-		xPos += 3;
+		xPos += 5;
 	}
 }
 
